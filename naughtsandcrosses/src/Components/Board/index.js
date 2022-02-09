@@ -3,24 +3,16 @@
 //  - renders square
 import Square from "../Square/index";
 
-export default function Board({ onClick, gameState }) {
+export default function Board({ squares, onSelectSquare }) {
   return (
-    <>
-      <div>
-        <Square />
-        <Square />
-        <Square />
-      </div>
-      <div>
-        <Square />
-        <Square />
-        <Square />
-      </div>
-      <div>
-        <Square />
-        <Square />
-        <Square />
-      </div>
-    </>
+    <div>
+      {squares.map((square, index) => (
+        <Square
+          key={index}
+          value={square}
+          onClick={() => onSelectSquare(index)}
+        />
+      ))}
+    </div>
   );
 }
