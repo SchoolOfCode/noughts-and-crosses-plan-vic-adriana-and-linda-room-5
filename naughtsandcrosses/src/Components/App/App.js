@@ -3,6 +3,7 @@ import "./App.css";
 import Square from "../Square";
 import { useState } from "react";
 import Board from "../Board";
+import { calculateWinner } from "../calculateWinner.js";
 
 function App() {
   //set state for game and player
@@ -10,12 +11,12 @@ function App() {
   // set the state for the player
   const [isPlayerX, setIsPlayerX] = useState(true);
   //  declare the winner
-  //const winner = calculateWinner(board);
+  const winner = calculateWinner(board);
   // declare the current Player
   const currentPlayer = isPlayerX ? "X" : "O";
 
   function handleSquareClick(index) {
-    if (board[index]) {
+    if (winner || board[index]) {
       return;
     } else {
       setBoard([
@@ -32,6 +33,7 @@ function App() {
     <div className="App">
       <h1>Hello</h1>
       <Board squares={board} onSelectSquare={handleSquareClick}></Board>
+      <h3>{winner ? "Winner" + winner : "Next Player: " + currentPlayer}</h3>
     </div>
   );
 }
